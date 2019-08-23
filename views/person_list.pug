@@ -4,11 +4,11 @@ block content
   h1= title
   
   ul
-  - course_list.sort(function(a, b) {let textA = a.courseTitle.toUpperCase(); let textB = b.courseTitle.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
-  each course in course_list
+  - person_list.sort(function(a, b) {let textA = a.firstName.toUpperCase(); let textB = b.firstName.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+  each person in person_list
     li 
-      a(href=course.url) #{course.courseTitle} 
-      | (#{course.promo.title})
+      a(href=person.url) #{person.firstName} 
+      | (#{person.personFunction})
 
   else
-    li There are no courses.
+    li There are no people.
