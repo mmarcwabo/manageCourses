@@ -8,7 +8,7 @@ const Person = new mongoose.Schema({
   email : String,
   age : Number,
   phone : String,
-  personFunction: {type: String, required: true, enum: ['Teacher', 'Student'], default: 'Student'},
+  personFunction: {type: String, required: true, default: 'Student'},
   details : String
   
 });
@@ -20,7 +20,7 @@ Person
 //virtual for person url
 Person.virtual('url').
 get(function(){
-  return '/coursemanager/profile'+this._id;
+  return '/coursemanager/person/'+this._id;
 });
 
 module.exports = mongoose.model('Person', Person);
