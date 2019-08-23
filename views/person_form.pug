@@ -7,14 +7,28 @@ block content
     div.form-group
       label(for='firstName') First Name:
       input#firstName.form-control(type='text', placeholder='First name (Christian)' name='firstName' required='true' value=(undefined===person ? '' : person.firstName) )
+    div.form-group
       label(for='lastName') Last Name:
       input#lastName.form-control(type='text', placeholder='Family name (Surname)' name='lastName' required='true' value=(undefined===person ? '' : person.lastName))
+    div.form-group
       label(for='email') Email:
       input#email.form-control(type='text', name='email' value=(undefined===person ? '' : person.email) )
     div.form-group
-      label(for='date_of_death') Date of death:
-      input#date_of_death.form-control(type='date', name='date_of_death' value=(undefined===author ? '' : author.date_of_death_yyyy_mm_dd) )
-    button.btn.btn-primary(type='submit') Submit
+      label(for='personFunction') Function:
+      select#personFunction.form-control.selectpicker(name='personFunction')
+        option(value='Student')
+        option(value='Teacher')
+    div.form-group
+      label(for='age') Age:
+      input#age.form-control(type='text', placeholder='age' name='age' required='true' value=(undefined===person ? 18 : person.age) )
+    div.form-group
+      label(for='phone') Phone:
+      input#phone.form-control(type='text', placeholder='phone' name='phone' required='false' value=(undefined===person ? '+2438809' : person.phone) )    
+    div.form-group
+      label(for='details') Other details:
+      textarea#details.form-control(placeholder='Details' name='details' required='false' value=(undefined===person ? 'RAS' : person.details) )
+    div.form-group
+      button.btn.btn-primary(type='submit') Submit
 
   if errors 
     ul
