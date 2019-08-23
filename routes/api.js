@@ -60,6 +60,6 @@ router.post('/person/:id/update', person_controller.person_update_post);
 router.get('/person/:id', person_controller.person_detail);
 
 //GET Request for all the persons list
-router.get('/persons', person_controller.person_list);
+router.get('/people', person_controller.person_list);
 
 module.exports = router;
