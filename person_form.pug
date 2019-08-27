@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1=title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='firstName') First Name:
+      input#firstName.form-control(type='text', placeholder='First name (Christian)' name='firstName' required='true' value=(undefined===person ? '' : person.firstName) )
+    div.form-group
+      label(for='lastName') Last Name:
+      input#lastName.form-control(type='text', placeholder='Family name (Surname)' name='lastName' required='true' value=(undefined===person ? '' : person.lastName))
+    div.form-group
+      label(for='email') Email:
+      input#email.form-control(type='text', name='email' value=(undefined===person ? '' : person.email) )
+    div.form-group
+      label(for='personFunction') Function:
+      select#personFunction.form-control.selectpicker(name='personFunction')
+        option(value='Student') Student
+        option(value='Teacher') Teacher
+    div.form-group
+      label(for='age') Age:
+      input#age.form-control(type='text', placeholder='age' name='age' required='true' value=(undefined===person ? 18 : person.age) )
+    div.form-group
+      label(for='phone') Phone:
+      input#phone.form-control(type='text', placeholder='phone' name='phone' required='false' value=(undefined===person ? '+2438809' : person.phone) )    
+    div.form-group
+      label(for='details') Other details:
+      textarea#details.form-control(placeholder='Details' name='details' required='false' value=(undefined===person ? 'RAS' : person.details) )
+    div.form-group
+      button.btn.btn-primary(type='submit') Add A Person
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
