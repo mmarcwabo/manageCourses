@@ -15,7 +15,7 @@ const Person = new mongoose.Schema({
 //virtual for person full name
 Person
 .virtual('name').get(function(){
-  return this.firstName+', '+this.lastName;
+  return this.firstName+' '+this.lastName;
 });
 //virtual for person url
 Person.virtual('url').

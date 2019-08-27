@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const Promo = new mongoose.Schema({
     title : String,
+    description : String
 });
 
 //virtual for promo url
