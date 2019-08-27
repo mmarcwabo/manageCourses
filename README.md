@@ -1,2 +1,11 @@
 # manageCourses
-A MERN Simple App - Made for learning purposes.
+
+🌟 A MERN (MongoDB, Express, React and NodeJS) Simple App - Made for learning purposes. 
+
+## Author
+
+**mmarcwabo**
+
+## Why
+
+* Practice
