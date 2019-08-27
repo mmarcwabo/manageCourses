@@ -1,5 +1,5 @@
 //teacher controller
-var teacher = require('../models/teacher');
+var Teacher = require('../models/Teacher');
 
 //Display list of all people
 exports.teacher_list = function(req, res){

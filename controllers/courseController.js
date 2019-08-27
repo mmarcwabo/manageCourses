@@ -1,5 +1,6 @@
 //Course controller
 var Course = require('../models/course');
+var Teacher = require('../models/Teacher');
 var Promo = require('../models/promo');
 
 const { body,validationResult } = require('express-validator/check');
@@ -75,10 +76,62 @@ exports.course_create_get = function(req, res){
     res.status(200).send('course_form', {title : "Create a Course"});
 };
 
-//Handle course create on POST
-exports.course_create_post = function (req, res){
-    res.send('course create POST');
-};
+// Handle course create on POST.
+exports.course_create_post = [
+    // Convert the genre to an array.
+    //
+
+    // Validate fields.
+    body('courseTitle', 'Title must not be empty.').isLength({ min: 1 }).trim(),
+    body('teacher', 'Teacher must not be empty.').isLength({ min: 1 }).trim(),
+    body('promo', 'Promo must not be empty.').isLength({ min: 1 }).trim(),
+    body('volume', 'volume must not be empty').isLength({ min: 1 }).trim(),
+  
+    // Sanitize fields.
+    sanitizeBody('*').escape(),
+    // Process request after validation and sanitization.
+    (req, res, next) => {
+        
+
+        // Extract the validation errors from a request.
+        const errors = validationResult(req);
+
+        // Create a Book object with escaped and trimmed data.
+        var book = new Book(
+          { courseTitle: req.body.courseTitle,
+            teacher: req.body.teacher,
+            promo: req.body.promo,
+            volume: req.body.volume,
+           });
+
+        if (!errors.isEmpty()) {
+            // There are errors. Render form again with sanitized values/error messages.
+
+            // Get all authors and genres for form.
+            async.parallel({
+                teachers: function(callback) {
+                    Teacher.find(callback);
+                },
+                promos: function(callback) {
+                    Promo.find(callback);
+                },
+            }, function(err, results) {
+                if (err) { return next(err); }
+
+                res.render('course_form', { title: 'Add a Course',authors:results.teachers, promos:results.promos, course: course, errors: errors.array() });
+            });
+            return;
+        }
+        else {
+            // Data from form is valid. Save book.
+            course.save(function (err) {
+                if (err) { return next(err); }
+                   // Successful - redirect to new book record.
+                   res.redirect(course.url);
+                });
+        }
+    }
+];
 
 //Display course delete on GET
 exports.course_delete_get = function (req, res){

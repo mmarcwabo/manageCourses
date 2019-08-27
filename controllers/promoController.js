@@ -12,8 +12,8 @@ exports.promo_detail = function(req, res){
 };
 
 //Display promo create form on GET
-exports.promo_create_get = function(req, res){
-    res.send('promo create GET');
+exports.promo_create_get = function(req, res, next){
+    res.render('promo_form', {title: 'Add a promotion'});
 };
 
 //Handle promo create on POST
